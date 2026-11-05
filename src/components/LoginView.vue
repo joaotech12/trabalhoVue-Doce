@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import type { LoginCredentials } from '../types/auth'
 
 defineProps<{
   loading: boolean
@@ -7,7 +8,7 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
-  login: [credentials: { email: string; password: string }]
+  login: [credentials: LoginCredentials]
 }>()
 
 const email = ref('')
@@ -42,6 +43,6 @@ function submit() {
 
       <p class="login-private"><span aria-hidden="true">♧</span> Acesso exclusivo da proprietária</p>
     </section>
-    <p v-if="error && !loading" class="login-help">Se não conseguir entrar, confira as credenciais configuradas no servidor.</p>
+    <p v-if="error && !loading" class="login-help">Se não conseguir entrar, confira se a API está rodando e as credenciais configuradas no servidor.</p>
   </main>
 </template>

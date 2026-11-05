@@ -21,10 +21,4 @@ export interface FixedExpense {
   amount: number
 }
 
-export interface StoreData {
-  products: Product[]
-  sales: Sale[]
-  expenses: FixedExpense[]
-}
-
 export type Section = 'dashboard' | 'sales' | 'expenses' | 'products'

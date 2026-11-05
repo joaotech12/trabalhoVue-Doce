@@ -22,7 +22,7 @@ O sistema deve permitir acompanhar receitas, custos dos produtos vendidos, despe
 - `src/types/`: interfaces e tipos compartilhados da aplicação.
 - `src/assets/`: imagens e outros recursos processados pelo Vite.
 - `public/`: arquivos estáticos servidos diretamente.
-- `src/App.vue`: composição das páginas e integração dos componentes.
+- `src/App.vue`: decide entre a tela de login e o painel (`src/components/StoreDashboard.vue`), que concentra as páginas da loja.
 - `src/style.css`: estilos globais; estilos específicos devem ficar junto ao componente correspondente quando apropriado.
 
 Agrupe arquivos por responsabilidade conforme o projeto crescer, sem criar abstrações ou pastas desnecessárias.
@@ -30,12 +30,13 @@ Agrupe arquivos por responsabilidade conforme o projeto crescer, sem criar abstr
 ## Regras de negócio
 
 - O preço de venda e o custo unitário devem pertencer ao produto; não codifique o cupcake como único produto.
-- Registre no histórico da venda o preço e o custo vigentes na data da venda, para que alterações futuras no cadastro não modifiquem resultados passados.
+- Registre no histórico da venda o preço e o custo vigentes na data da venda, para que alterações futuras no cadastro não modifiquem resultados passados. Esses valores são definidos pela API ao criar a venda.
 - O lucro líquido do mês é: receita das vendas menos custos variáveis dos itens vendidos menos despesas fixas do mês.
 - Despesas fixas recorrentes devem ser consideradas uma vez em cada mês selecionado.
 - Formate valores com `Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })`.
-- Persista dados locais de forma consistente. Não apresente valores de demonstração como se fossem vendas reais.
+- Persista os dados no PostgreSQL por meio da API do repositório `SERVER-DOCE` (`/api/products`, `/api/sales`, `/api/expenses`); o front nunca acessa o banco diretamente. Não apresente valores de demonstração como se fossem vendas reais.
 - Valide valores numéricos e campos obrigatórios antes de aceitar cadastros.
+- O acesso é exclusivo da dona: há uma única conta, definida no servidor, sem cadastro de usuários. Toda rota de dados da API exige login.
 
 ## Qualidade
 
